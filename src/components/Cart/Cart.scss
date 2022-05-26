@@ -1,0 +1,15 @@
+.cart-container {
+  width: 100%;
+  min-width: 300px;
+  padding-top: 20px;
+
+  .cart-header {
+    display: flex;
+    justify-content: space-between;
+
+    .cart-icon {
+      width: 25px;
+      height: 25px;
+    }
+  }
+}

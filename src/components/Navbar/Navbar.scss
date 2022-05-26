@@ -1,0 +1,25 @@
+.navbar {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 6rem;
+  max-width: 1240px;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  background-color: peru;
+}
+
+.title {
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 36px;
+}
+
+.list-container {
+  display: flex;
+}
+
+.action-icon {
+  padding: 1rem;
+}

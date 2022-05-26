@@ -1,21 +1,20 @@
-import React, { useContext } from "react";
-import { CartContext } from "../../context/CartContext";
-import data from "../../lib/products.json";
+import React, { useContext, useEffect, useState } from "react";
+
+import useShop from "../../context/ShopContext";
+import { Product } from "../../interfaces/interfaces";
 import "./Products.scss";
 
 const Products = () => {
-  const cartContext: any = useContext(CartContext);
+  const { products } = useShop();
 
   return (
     <div className="products-container">
-      {data.products.map((product, i) => (
+      {products.map((product: Product, i: number) => (
         <div key={i} className="product">
           <h3>{product.name} </h3>
           <p>Precio: ${product.price}</p>
-          <p>Restantes: {product.amount}</p>
-          <button onClick={() => cartContext.addItemToCart(product)}>
-            Agregar al carro
-          </button>
+          <p>Stock: {product.amount}</p>
+
         </div>
       ))}
     </div>

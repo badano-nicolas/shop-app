@@ -1,16 +1,50 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
+import { Product } from "../../interfaces/interfaces";
+import { IoMdTrash } from "react-icons/io";
+import "./Cart.scss";
+import CartItem from "../CartItem/CartItem";
+import useShop from "../../context/ShopContext";
 
 const Cart = () => {
-  const [cartOpen, setCartOpen] = useState(false);
-  const [productsLenght, setProductsLenght] = useState(0);
+  const { cartItems } = useShop();
 
-  useEffect(() => {
-    
-  });
+  useEffect(() => {}, [cartItems]);
+
+  const total = cartItems?.reduce(
+    (previous: any, current: any) => previous + current.amount * current.price,
+    0
+  );
+
+  const removeAllCartItems = () => {
+    cartItems.map((productInCart: Product) => {
+      //cartContext.removeItem(productInCart.id, "del", productInCart.amount);
+    });
+  };
 
   return (
-    <div>
-      <h1>Cart</h1>
+    <div className="cart-container">
+      {cartItems && (
+        <div className="cart">
+          <div className="cart-header">
+            <h2>Carrito</h2>
+            <IoMdTrash
+              className="cart-icon"
+              onClick={() => removeAllCartItems()}
+            />
+          </div>
+
+          {cartItems.length === 0 ? (
+            <p>Tu carrito esta vacio</p>
+          ) : (
+            <div>
+              {cartItems.map((item: Product, i: number) => (
+                <CartItem key={i} item={item} />
+              ))}
+            </div>
+          )}
+          <h3>Pagar total: ${total}</h3>
+        </div>
+      )}
     </div>
   );
 };

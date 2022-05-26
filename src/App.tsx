@@ -1,12 +1,12 @@
 import "./App.scss";
-import Home from "./components/Home/Home";
-import { CartProvider } from "./context/CartProvider";
+import Home from "./pages/Home/Home";
+import { ShopProvider } from "./context/ShopContext";
 
 function App() {
   return (
-    <CartProvider>
+    <ShopProvider>
       <Home />
-    </CartProvider>
+    </ShopProvider>
   );
 }
 
