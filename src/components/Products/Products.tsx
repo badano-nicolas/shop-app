@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
+import { CartContext } from "../../context/CartContext";
 import data from "../../lib/products.json";
 import "./Products.scss";
 
 const Products = () => {
+  const cartContext: any = useContext(CartContext);
+
   return (
     <div className="products-container">
       {data.products.map((product, i) => (
@@ -10,7 +13,9 @@ const Products = () => {
           <h3>{product.name} </h3>
           <p>Precio: ${product.price}</p>
           <p>Restantes: {product.amount}</p>
-          <button onClick={() => console.log(product)}>Agregar al carro</button>
+          <button onClick={() => cartContext.addItemToCart(product)}>
+            Agregar al carro
+          </button>
         </div>
       ))}
     </div>
