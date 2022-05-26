@@ -1,0 +1,10 @@
+@use "./scss/abstracts/variables";
+@use "./scss/abstracts/mixins";
+
+@use "./scss/base/base";
+@use "./scss/base/resets";
+
+html,
+body {
+  font-family: var(--font-roboto);
+}
