@@ -1,36 +1,33 @@
-import data from "../lib/products.json";
+import { TYPES, Product } from "../actions/shoppingActions";
+
 export const initialState = {
   total: 0,
   products: [],
-  cartItems: []
+  cartItems: [],
 };
 
 const shopReducer = (state: any, action: any) => {
   const { type, payload } = action;
 
+  console.log(type, payload);
+
   switch (type) {
-    case "ADD_TO_CART":
-      console.log("ADD_TO_CART", payload);
-
+    case TYPES.ADD_TO_CART:
       return {
         ...state,
         cartItems: payload.cartItems,
       };
-    case "REMOVE_FROM_CART":
-      console.log("REMOVE_FROM_CART", payload);
-
+    case TYPES.REMOVE_FROM_CART:
       return {
         ...state,
         cartItems: payload.cartItems,
       };
-    case "UPDATE_PRICE":
-      console.log("UPDATE_PRICE", payload);
+    case TYPES.REMOVE_ALL_FROM_CART:
       return {
         ...state,
         total: payload.total,
       };
-    case "UPDATE_PRODUCTS":
-      console.log("UPDATE_PRODUCTS", payload);
+    case TYPES.UPDATE_PRODUCTS:
       return {
         ...state,
         products: payload.products,

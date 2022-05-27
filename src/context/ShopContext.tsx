@@ -1,9 +1,21 @@
 import { createContext, useReducer, useContext, useEffect } from "react";
 import shopReducer, { initialState } from "./ShopReducer";
-import { Product } from "../interfaces/interfaces";
 import productsData from "../lib/products.json";
+import { TYPES, Product } from "../actions/shoppingActions";
 
-const ShopContext = createContext(initialState);
+type ShopContextType = {
+  products: Product[];
+  cartItems: Product[];
+  total: number;
+  addToCart: (product: Product) => void;
+  removeFromCart: (product: Product) => void;
+};
+
+const ShopContext = createContext<ShopContextType>({
+  ...initialState,
+  addToCart: () => {},
+  removeFromCart: () => {},
+});
 
 interface props {
   children: JSX.Element | JSX.Element[];
@@ -21,9 +33,8 @@ export const ShopProvider = ({ children }: props) => {
 
   const addToCart = (product: Product) => {
     const updatedCart = state.products.concat(product);
-    updatePrice(updatedCart);
     dispatch({
-      type: "ADD_TO_CART",
+      type: TYPES.ADD_TO_CART,
       payload: {
         products: updatedCart,
       },
@@ -34,24 +45,11 @@ export const ShopProvider = ({ children }: props) => {
     const updatedCart = state.products.filter(
       (currentProduct: Product) => currentProduct.name !== product.name
     );
-    updatePrice(updatedCart);
 
     dispatch({
       type: "REMOVE_FROM_CART",
       payload: {
         products: updatedCart,
-      },
-    });
-  };
-
-  const updatePrice = (products: Array<Product>) => {
-    let total = 0;
-    products.forEach((product: Product) => (total += product.price));
-
-    dispatch({
-      type: "UPDATE_PRICE",
-      payload: {
-        total,
       },
     });
   };

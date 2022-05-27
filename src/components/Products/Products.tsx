@@ -1,11 +1,9 @@
-import React, { useContext, useEffect, useState } from "react";
-
 import useShop from "../../context/ShopContext";
-import { Product } from "../../interfaces/interfaces";
+import { Product } from "../../actions/shoppingActions";
 import "./Products.scss";
 
 const Products = () => {
-  const { products } = useShop();
+  const { products, addToCart, removeFromCart } = useShop();
 
   return (
     <div className="products-container">
@@ -14,7 +12,10 @@ const Products = () => {
           <h3>{product.name} </h3>
           <p>Precio: ${product.price}</p>
           <p>Stock: {product.amount}</p>
-
+          <button onClick={() => addToCart(product)}>Agregar al carro</button>
+          <button onClick={() => removeFromCart(product)}>
+            Eliminar del carro
+          </button>
         </div>
       ))}
     </div>

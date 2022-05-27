@@ -1,5 +1,5 @@
-import React, { useContext, useEffect } from "react";
-import { Product } from "../../interfaces/interfaces";
+import { useEffect } from "react";
+import { Product } from "../../actions/shoppingActions";
 import { IoMdTrash } from "react-icons/io";
 import "./Cart.scss";
 import CartItem from "../CartItem/CartItem";
