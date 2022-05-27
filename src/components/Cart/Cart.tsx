@@ -6,7 +6,7 @@ import CartItem from "../CartItem/CartItem";
 import useShop from "../../context/ShopContext";
 
 const Cart = () => {
-  const { cartItems } = useShop();
+  const { cartItems, addProductToCart, removeProductFromCart } = useShop();
 
   useEffect(() => {}, [cartItems]);
 
@@ -17,7 +17,7 @@ const Cart = () => {
 
   const removeAllCartItems = () => {
     cartItems.map((productInCart: Product) => {
-      //cartContext.removeItem(productInCart.id, "del", productInCart.amount);
+      removeProductFromCart(productInCart);
     });
   };
 

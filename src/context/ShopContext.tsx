@@ -6,14 +6,16 @@ import { TYPES, Product } from "../actions/shoppingActions";
 type ShopContextType = {
   products: Product[];
   cartItems: Product[];
-  addToCart: (product: Product) => void;
-  removeFromCart: (product: Product) => void;
+  addProductToCart: (product: Product) => void;
+  removeProductFromCart: (product: Product) => void;
+  addNewProduct: (product: Product) => void;
 };
 
 const ShopContext = createContext<ShopContextType>({
   ...initialState,
-  addToCart: () => {},
-  removeFromCart: () => {},
+  addProductToCart: () => {},
+  removeProductFromCart: () => {},
+  addNewProduct: () => {},
 });
 
 interface props {
@@ -24,44 +26,49 @@ export const ShopProvider = ({ children }: props) => {
   const [state, dispatch] = useReducer(shopReducer, initialState);
 
   useEffect(() => {
-    console.log();
     if (state.products.length < 1) {
       initProducts(productsData.products);
     }
-  });
+  }, [state]);
 
-  const addToCart = (product: Product) => {
+  const addProductToCart = (product: Product) => {
+    console.log("addProductToCart - shopContext");
     dispatch({
       type: TYPES.ADD_TO_CART,
       payload: product,
     });
   };
 
-  const removeFromCart = (product: Product) => {
-    const updatedCart = state.products.filter(
-      (currentProduct: Product) => currentProduct.name !== product.name
-    );
-    /*
+  const removeProductFromCart = (product: Product) => {
+    console.log("removeProductFromCart - shopContext");
     dispatch({
-      type: "REMOVE_FROM_CART",
-      payload: {
-        products: updatedCart,
-      },
-    });*/
+      type: TYPES.REMOVE_FROM_CART,
+      payload: product,
+    });
   };
 
   const initProducts = (products: Array<Product>) => {
+    console.log("initProducts - shopContext");
     dispatch({
       type: TYPES.UPDATE_PRODUCTS,
       payload: products,
     });
   };
 
+  const addNewProduct = (product: Product) => {
+    console.log("addNewProduct - shopContext");
+    dispatch({
+      type: TYPES.ADD_PRODUCT,
+      payload: product,
+    });
+  };
+
   const value = {
     products: state.products,
     cartItems: state.cartItems,
-    addToCart,
-    removeFromCart,
+    addProductToCart: addProductToCart,
+    removeProductFromCart: removeProductFromCart,
+    addNewProduct: addNewProduct,
   };
   return <ShopContext.Provider value={value}>{children}</ShopContext.Provider>;
 };

@@ -3,19 +3,17 @@ import "./CartItem.scss";
 import { IoMdAddCircle, IoMdRemoveCircle } from "react-icons/io";
 
 const CartItem = ({ item }: any) => {
-  const { cartItems } = useShop();
-
-  const { amount } = item.amount;
+  const { addProductToCart, removeProductFromCart } = useShop();
 
   return (
     <div className="item-container">
       <div className="left">
         <p>{item.name}</p>
         <div className="buttons">
-          <button>
+          <button onClick={() => addProductToCart(item)}>
             <IoMdAddCircle />
           </button>
-          <button>
+          <button onClick={() => removeProductFromCart(item)}>
             <IoMdRemoveCircle />
           </button>
         </div>

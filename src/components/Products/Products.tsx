@@ -3,7 +3,7 @@ import { Product } from "../../actions/shoppingActions";
 import "./Products.scss";
 
 const Products = () => {
-  const { products, addToCart, removeFromCart } = useShop();
+  const { products, addProductToCart, removeProductFromCart } = useShop();
 
   return (
     <div className="products-container">
@@ -12,8 +12,10 @@ const Products = () => {
           <h3>{product.name} </h3>
           <p>Precio: ${product.price}</p>
           <p>Stock: {product.amount}</p>
-          <button onClick={() => addToCart(product)}>Agregar al carro</button>
-          <button onClick={() => removeFromCart(product)}>
+          <button onClick={() => addProductToCart(product)}>
+            Agregar al carro
+          </button>
+          <button onClick={() => removeProductFromCart(product)}>
             Eliminar del carro
           </button>
         </div>

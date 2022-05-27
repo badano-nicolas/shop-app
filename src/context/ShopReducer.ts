@@ -12,7 +12,7 @@ const shopReducer = (state: ShopContextType, action: any) => {
 
   switch (type) {
     case TYPES.ADD_TO_CART:
-      // If the product has stock will continue
+      // If the product has stock
       if (payload.amount > 0) {
         const inCart: Product | undefined = state.cartItems.find(
           (productInCart) => productInCart.id === payload.id
@@ -22,24 +22,27 @@ const shopReducer = (state: ShopContextType, action: any) => {
         );
 
         // If the product is in cart and product will add stock
-        if (inCart && inProduct) {
-          inCart.amount++;
-          inProduct.amount--;
-        }
-        // If the product is not in the cart but is in the product
-        else if (inProduct) {
-          inProduct.amount--;
-          const newProduct: Product = {
-            amount: 0,
-            id: inProduct.id,
-            name: inProduct.name,
-            price: inProduct.price,
-          };
+        if (inProduct) {
+          if (inCart) {
+            inCart.amount++;
+            inProduct.amount--;
+          }
 
-          return {
-            ...state,
-            cartItems: state.cartItems.push(newProduct),
-          };
+          // If the product is not in the cart
+          else {
+            inProduct.amount--;
+            const newProduct: Product = {
+              amount: 0,
+              id: inProduct.id,
+              name: inProduct.name,
+              price: inProduct.price,
+            };
+
+            return {
+              ...state,
+              cartItems: state.cartItems.push(newProduct),
+            };
+          }
         }
       }
 
@@ -48,16 +51,42 @@ const shopReducer = (state: ShopContextType, action: any) => {
         cartItems: state.cartItems,
       };
     case TYPES.REMOVE_FROM_CART:
+      const inCart: Product | undefined = state.cartItems.find(
+        (productInCart) => productInCart.id === payload.id
+      );
+      const inProduct: Product | undefined = state.products.find(
+        (inProduct) => inProduct.id === payload.id
+      );
+
+      if (inCart) {
+        if (inCart.amount === 1) {
+          const newCartList: Product[] = state.cartItems.filter(
+            (productInCart) => productInCart.id !== inCart.id
+          );
+          return {
+            ...state,
+            cartItems: newCartList,
+          };
+        }
+        if (inCart.amount > 1) {
+          inCart.amount--;
+
+          if (inProduct) {
+            inProduct.amount++;
+          }
+        }
+      }
+
       return {
         ...state,
         cartItems: payload,
       };
-    case TYPES.REMOVE_ALL_FROM_CART:
+    case TYPES.UPDATE_PRODUCTS:
       return {
         ...state,
-        cartItems: state.cartItems,
+        products: payload,
       };
-    case TYPES.UPDATE_PRODUCTS:
+    case TYPES.ADD_PRODUCT:
       return {
         ...state,
         products: payload,
