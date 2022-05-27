@@ -1,4 +1,3 @@
-import React, { useContext } from "react";
 import useShop from "../../context/ShopContext";
 import "./CartItem.scss";
 import { IoMdAddCircle, IoMdRemoveCircle } from "react-icons/io";
@@ -6,21 +5,17 @@ import { IoMdAddCircle, IoMdRemoveCircle } from "react-icons/io";
 const CartItem = ({ item }: any) => {
   const { cartItems } = useShop();
 
-  const { amount } = item;
+  const { amount } = item.amount;
 
   return (
     <div className="item-container">
       <div className="left">
         <p>{item.name}</p>
         <div className="buttons">
-          <button
-           
-          >
+          <button>
             <IoMdAddCircle />
           </button>
-          <button
-           
-          >
+          <button>
             <IoMdRemoveCircle />
           </button>
         </div>

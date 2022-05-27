@@ -6,7 +6,6 @@ import { TYPES, Product } from "../actions/shoppingActions";
 type ShopContextType = {
   products: Product[];
   cartItems: Product[];
-  total: number;
   addToCart: (product: Product) => void;
   removeFromCart: (product: Product) => void;
 };
@@ -32,12 +31,9 @@ export const ShopProvider = ({ children }: props) => {
   });
 
   const addToCart = (product: Product) => {
-    const updatedCart = state.products.concat(product);
     dispatch({
       type: TYPES.ADD_TO_CART,
-      payload: {
-        products: updatedCart,
-      },
+      payload: product,
     });
   };
 
@@ -45,26 +41,23 @@ export const ShopProvider = ({ children }: props) => {
     const updatedCart = state.products.filter(
       (currentProduct: Product) => currentProduct.name !== product.name
     );
-
+    /*
     dispatch({
       type: "REMOVE_FROM_CART",
       payload: {
         products: updatedCart,
       },
-    });
+    });*/
   };
 
   const initProducts = (products: Array<Product>) => {
     dispatch({
-      type: "UPDATE_PRODUCTS",
-      payload: {
-        products,
-      },
+      type: TYPES.UPDATE_PRODUCTS,
+      payload: products,
     });
   };
 
   const value = {
-    total: state.total,
     products: state.products,
     cartItems: state.cartItems,
     addToCart,
