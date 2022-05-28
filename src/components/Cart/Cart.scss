@@ -1,15 +1,19 @@
+@use "../../scss/abstracts/colors" as *;
+
 .cart-container {
-  width: 100%;
-  min-width: 300px;
-  padding-top: 20px;
+  width: 300px;
+  display: flex;
+  flex-flow: wrap column;
 
-  .cart-header {
-    display: flex;
-    justify-content: space-between;
-
-    .cart-icon {
-      width: 25px;
-      height: 25px;
+  .items-container {
+      p {
+          padding: 1rem;
+      }
+    .header-container {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
   }
 }

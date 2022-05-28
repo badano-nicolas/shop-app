@@ -1,3 +1,5 @@
+@use "../../scss/abstracts/colors" as *;
+
 .navbar {
   width: 100%;
   display: flex;
@@ -7,19 +9,23 @@
   max-width: 1240px;
   padding-left: 1rem;
   padding-right: 1rem;
-  background-color: peru;
-}
 
-.title {
-  font-weight: 700;
-  font-size: 30px;
-  line-height: 36px;
-}
+  .title {
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 36px;
+  }
 
-.list-container {
-  display: flex;
-}
+  .list-container {
+    display: flex;
 
-.action-icon {
-  padding: 1rem;
+    ul {
+      display: flex;
+      margin: 5px;
+
+      li {
+        margin: 0 1rem;
+      }
+    }
+  }
 }

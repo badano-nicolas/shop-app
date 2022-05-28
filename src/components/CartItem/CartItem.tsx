@@ -6,10 +6,10 @@ const CartItem = ({ item }: any) => {
   const { addProductToCart, removeProductFromCart } = useShop();
 
   return (
-    <div className="item-container">
-      <div className="left">
+    <div className="">
+      <div className="">
         <p>{item.name}</p>
-        <div className="buttons">
+        <div className="">
           <button onClick={() => addProductToCart(item)}>
             <IoMdAddCircle />
           </button>
@@ -18,7 +18,7 @@ const CartItem = ({ item }: any) => {
           </button>
         </div>
       </div>
-      <div className="right">
+      <div className="">
         <div>{item.amount}</div>
         <p>Total: ${item.amount * item.price}</p>
       </div>

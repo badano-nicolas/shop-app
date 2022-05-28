@@ -17,3 +17,4 @@ export type ShopContextType = {
   products: Product[];
   cartItems: Product[];
 };
+

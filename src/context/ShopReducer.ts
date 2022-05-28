@@ -5,6 +5,10 @@ export const initialState: ShopContextType = {
   cartItems: [],
 };
 
+const findProduct = (products: Product[], productToFind: Product) => {
+  return products.find((productFound) => productFound.id === productToFind.id);
+};
+
 const shopReducer = (state: ShopContextType, action: any) => {
   const { type, payload } = action;
 
@@ -14,11 +18,13 @@ const shopReducer = (state: ShopContextType, action: any) => {
     case TYPES.ADD_TO_CART:
       // If the product has stock
       if (payload.amount > 0) {
-        const inCart: Product | undefined = state.cartItems.find(
-          (productInCart) => productInCart.id === payload.id
+        const inCart: Product | undefined = findProduct(
+          state.cartItems,
+          payload
         );
-        const inProduct: Product | undefined = state.products.find(
-          (inProduct) => inProduct.id === payload.id
+        const inProduct: Product | undefined = findProduct(
+          state.products,
+          payload
         );
 
         // If the product is in cart and product will add stock
@@ -51,11 +57,10 @@ const shopReducer = (state: ShopContextType, action: any) => {
         cartItems: state.cartItems,
       };
     case TYPES.REMOVE_FROM_CART:
-      const inCart: Product | undefined = state.cartItems.find(
-        (productInCart) => productInCart.id === payload.id
-      );
-      const inProduct: Product | undefined = state.products.find(
-        (inProduct) => inProduct.id === payload.id
+      const inCart: Product | undefined = findProduct(state.cartItems, payload);
+      const inProduct: Product | undefined = findProduct(
+        state.products,
+        payload
       );
 
       if (inCart) {
