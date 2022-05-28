@@ -17,15 +17,12 @@
   }
 
   .list-container {
-    display: flex;
+    width: 100%;
 
     ul {
       display: flex;
-      margin: 5px;
-
-      li {
-        margin: 0 1rem;
-      }
+      flex-direction: row;
+      justify-content: flex-end;
     }
   }
 }

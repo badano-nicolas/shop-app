@@ -6,23 +6,20 @@ const CartItem = ({ item }: any) => {
   const { addProductToCart, removeProductFromCart } = useShop();
 
   return (
-    <div className="">
-      <div className="">
-        <p>{item.name}</p>
-        <div className="">
-          <button onClick={() => addProductToCart(item)}>
-            <IoMdAddCircle />
-          </button>
-          <button onClick={() => removeProductFromCart(item)}>
-            <IoMdRemoveCircle />
-          </button>
-        </div>
-      </div>
-      <div className="">
-        <div>{item.amount}</div>
-        <p>Total: ${item.amount * item.price}</p>
-      </div>
-    </div>
+    <tr className="">
+      <td>{item.name}</td>
+      <td>{item.amount}</td>
+      <td>
+        <IoMdRemoveCircle
+          onClick={() => removeProductFromCart(item)}
+          className="table-icon"
+        />
+        <IoMdAddCircle
+          onClick={() => addProductToCart(item)}
+          className="table-icon"
+        />
+      </td>
+    </tr>
   );
 };
 

@@ -6,14 +6,81 @@
   flex-flow: wrap column;
 
   .items-container {
-      p {
-          padding: 1rem;
-      }
+    p {
+      padding: 1rem;
+    }
     .header-container {
       width: 100%;
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
+
+    .cart-content-container {
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: column;
+
+      .table-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .cart-table {
+          border-collapse: collapse;
+          width: 100%;
+          box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+          padding: 1px;
+
+          tr {
+            color: $text;
+            text-align: left;
+            margin: 2px 4px;
+
+            th {
+              padding: 2px 4px;
+            }
+            td {
+              padding: 2px 2px;
+            }
+
+            td .table-icon {
+              cursor: pointer;
+            }
+          }
+        }
+      }
+
+      h3 {
+        padding: 1rem;
+      }
+    }
+  }
+}
+.light .cart-container .items-container .table-container .cart-table {
+  tr {
+    background-color: $gray-100;
+  }
+  tr:nth-child(even) {
+    background-color: $gray-200;
+  }
+  thead tr th {
+    background-color: $primary;
+  }
+}
+
+.dark .cart-container .items-container .table-container .cart-table {
+  tr {
+    background-color: $gray-300;
+  }
+  tr:nth-child(even) {
+    background-color: $gray-400;
+  }
+  tr:hover {
+    background-color: $dark-100;
+  }
+
+  thead tr th {
+    background-color: $secondary;
   }
 }
