@@ -11,38 +11,6 @@ a {
   display: block;
 }
 
-.light {
-  background-color: $background;
-
-  .navbar-container {
-    background-color: $primary;
-  }
-
-  button {
-    background: $secondary;
-  }
-
-  .card {
-    background-color: $white;
-  }
-}
-
-.dark {
-  background-color: $background-dark;
-  color: $white;
-
-  .navbar-container {
-    background-color: $secondary;
-  }
-
-  button {
-    background: $primary;
-  }
-  .card {
-    background-color: $background;
-  }
-}
-
 .card {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   border-radius: 5px;
@@ -69,4 +37,45 @@ h3,
 a,
 button {
   color: $text;
+}
+
+.light {
+  background-color: $background;
+
+  .navbar-container {
+    background-color: $primary;
+  }
+
+  button {
+    background: $secondary;
+  }
+
+  button:hover {
+    background: $background;
+  }
+
+  .card {
+    background-color: $white;
+  }
+}
+
+.dark {
+  background-color: $background-dark;
+  color: $white;
+
+  .navbar-container {
+    background-color: $secondary;
+  }
+
+  button {
+    background: $primary;
+  }
+
+  button:hover {
+    background: $background-dark;
+    color: $white;
+  }
+  .card {
+    background-color: $background;
+  }
 }

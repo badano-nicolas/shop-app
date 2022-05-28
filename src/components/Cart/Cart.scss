@@ -4,6 +4,7 @@
   width: 300px;
   display: flex;
   flex-flow: wrap column;
+  max-height: 800px;
 
   .items-container {
     p {
@@ -63,6 +64,9 @@
   }
   tr:nth-child(even) {
     background-color: $gray-200;
+  }
+  tr:hover {
+    background-color: $dark-100;
   }
   thead tr th {
     background-color: $primary;
