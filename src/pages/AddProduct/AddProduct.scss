@@ -1,0 +1,44 @@
+@use "../../scss/abstracts/colors" as *;
+
+.add-product-container {
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: flex-start;
+  h2 {
+    padding: 1rem;
+  }
+
+  .form-container {
+    padding: 0 1rem;
+    display: flex;
+    background-color: $gray-100;
+    border-radius: 5px;
+    padding: 20px;
+    .add-product-form {
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: column;
+
+      .field-container {
+        padding: 0.5rem 0;
+        label {
+          color: $text;
+          font-weight: bold;
+        }
+        input {
+          width: 100%;
+          padding: 12px 20px;
+          margin: 8px 0;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+          box-sizing: border-box;
+        }
+      }
+
+      button {
+        width: 100%;
+      }
+    }
+  }
+}

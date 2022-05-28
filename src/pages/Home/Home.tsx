@@ -3,7 +3,6 @@ import Cart from "../../components/Cart/Cart";
 import Navbar from "../../components/Navbar/Navbar";
 import Products from "../../components/Products/Products";
 import { ThemeContext } from "../../context/ThemeContext";
-import "./Home.scss"
 
 const Home = () => {
   const { theme } = useContext(ThemeContext);
@@ -12,7 +11,7 @@ const Home = () => {
     <div className={theme}>
       <Navbar />
       <div className="container">
-        <div className="home-container">
+        <div className="main-container">
           <Products />
           <Cart />
         </div>
