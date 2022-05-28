@@ -1,5 +1,4 @@
 import useShop from "../../context/ShopContext";
-import "./CartItem.scss";
 import { IoMdAddCircle, IoMdRemoveCircle } from "react-icons/io";
 
 const CartItem = ({ item }: any) => {

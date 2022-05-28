@@ -7,7 +7,10 @@
   align-content: flex-start;
 
   .product-card {
-    button {
+    display: flex;
+    flex-flow: wrap column;
+    p {
+      padding: 4px 0;
     }
   }
 }
