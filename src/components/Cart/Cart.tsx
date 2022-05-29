@@ -7,7 +7,7 @@ import useShop from "../../context/ShopContext";
 const Cart = () => {
   const { cartItems, removeProductFromCart } = useShop();
 
-  let total = cartItems?.reduce(
+  let total: number = cartItems?.reduce(
     (previous: any, current: any) => previous + current.amount * current.price,
     0
   );

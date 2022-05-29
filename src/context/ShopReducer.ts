@@ -17,90 +17,100 @@ const shopReducer = (state: ShopContextType, action: any) => {
   switch (type) {
     case TYPES.ADD_TO_CART:
       // If the product has stock
+      const cartItemAddToCart: Product[] = [...state.cartItems];
+      const productsList: Product[] = [...state.products];
+
       if (payload.amount > 0) {
         const inCart: Product | undefined = findProduct(
-          state.cartItems,
+          cartItemAddToCart,
           payload
         );
         const inProduct: Product | undefined = findProduct(
-          state.products,
+          productsList,
           payload
         );
 
+        console.log(inCart);
         // If the product is in cart and product will add stock
-        if (inProduct) {
-          if (inCart) {
-            inCart.amount++;
-            inProduct.amount--;
-          }
 
-          // If the product is not in the cart
-          else {
-            inProduct.amount--;
-            const newProduct: Product = {
-              amount: 0,
-              id: inProduct.id,
-              name: inProduct.name,
-              price: inProduct.price,
-            };
+        if (inCart) {
+          inCart.amount++;
+        }
 
-            return {
-              ...state,
-              cartItems: state.cartItems.push(newProduct),
-            };
-          }
+        /*
+
+          {cartItems.length === 0 ? (
+            <p>Tu carrito esta vacio</p>
+          ) : (
+          */
+
+        // If the product is not in the cart
+        else {
+          const newProduct: Product = {
+            amount: 1,
+            id: payload.id,
+            name: payload.name,
+            price: payload.price,
+          };
+          cartItemAddToCart.push(newProduct);
         }
       }
 
       return {
         ...state,
-        cartItems: state.cartItems,
+        cartItems: cartItemAddToCart,
       };
 
     case TYPES.REMOVE_FROM_CART:
-      console.log(payload);
-      const inCart: Product | undefined = findProduct(state.cartItems, payload);
-      const inProduct: Product | undefined = findProduct(
-        state.products,
+      const removeFromCartCartItems: Product[] = [...state.cartItems];
+      const removeFromCartProducts: Product[] = [...state.products];
+
+      const removeFromCartInCart: Product | undefined = findProduct(
+        removeFromCartCartItems,
+        payload
+      );
+      const removeFromCartInProduct: Product | undefined = findProduct(
+        removeFromCartProducts,
         payload
       );
 
-      if (inCart) {
-        if (inCart.amount === 1) {
-          console.log("Amount === 1");
-          const newCartList: Product[] = state.cartItems.filter(
-            (productInCart) => productInCart.id !== inCart.id
-          );
+      // If is already in cart
+      if (removeFromCartInCart) {
+        // If is only one will remove the product from list
+        if (removeFromCartInCart.amount === 1) {
           return {
             ...state,
-            cartItems: newCartList,
+            cartItems: removeFromCartCartItems.filter(
+              (productInCart) => productInCart.id !== removeFromCartInCart.id
+            ),
+            products: removeFromCartProducts,
+            //removeFromCartInProduct.amount++;
+            // I have to return updated products list
           };
         }
-        if (inCart.amount > 1) {
-          console.log("Amount > 1");
-          inCart.amount--;
-          if (inProduct) {
-            inProduct.amount++;
+        // If more than one
+        if (removeFromCartInCart.amount > 1) {
+          removeFromCartInCart.amount--;
+          if (removeFromCartInProduct) {
+            removeFromCartInProduct.amount++;
           }
         }
       }
 
       return {
         ...state,
-        products: state.products,
-        cartItems: state.cartItems,
+        products: removeFromCartInCart,
+        cartItems: removeFromCartCartItems,
       };
-    case "DONTREMOVE":
-      // For some reason if i remove this case, shop context will have an error ill fix later
-      return {
-        ...state,
-        cartItems: payload,
-      };
-
     case TYPES.UPDATE_PRODUCTS:
       return {
         ...state,
         products: payload,
+      };
+    case TYPES.UPDATE_CART:
+      return {
+        ...state,
+        cartItems: payload,
       };
     case TYPES.ADD_PRODUCT:
       const newProduct: Product = payload;

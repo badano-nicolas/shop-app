@@ -3,6 +3,7 @@ export const TYPES = {
   REMOVE_FROM_CART: "REMOVE_FROM_CART",
   REMOVE_ALL_FROM_CART: "REMOVE_ALL_FROM_CART",
   UPDATE_PRODUCTS: "UPDATE_PRODUCTS",
+  UPDATE_CART: "UPDATE_PRODUCTS",
   ADD_PRODUCT: "ADD_PRODUCT",
 };
 
@@ -17,4 +18,3 @@ export type ShopContextType = {
   products: Product[];
   cartItems: Product[];
 };
-
