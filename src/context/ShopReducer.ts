@@ -19,16 +19,14 @@ const shopReducer = (state: ShopContextType, action: any) => {
       const cartItemAddToCart: Product[] = [...state.cartItems];
       const productsList: Product[] = [...state.products];
       // If the product has stock
-      if (payload.amount > 0) {
-        const inCart: Product | undefined = findProduct(
-          cartItemAddToCart,
-          payload
-        );
-        const inProduct: Product | undefined = findProduct(
-          productsList,
-          payload
-        );
 
+      const inCart: Product | undefined = findProduct(
+        cartItemAddToCart,
+        payload
+      );
+      const inProduct: Product | undefined = findProduct(productsList, payload);
+
+      if (inProduct && inProduct.amount > 0) {
         // If the product is in cart and product will add stock
 
         if (inCart && inProduct) {
@@ -58,45 +56,44 @@ const shopReducer = (state: ShopContextType, action: any) => {
       };
 
     case TYPES.REMOVE_FROM_CART:
-      const removeFromCartCartItems: Product[] = [...state.cartItems];
-      const removeFromCartProducts: Product[] = [...state.products];
-
-      const removeFromCartInCart: Product | undefined = findProduct(
-        removeFromCartCartItems,
+      const cartItemsRemove: Product[] = [...state.cartItems];
+      const productsListRemove: Product[] = [...state.products];
+      const inCartRemove: Product | undefined = findProduct(
+        cartItemsRemove,
         payload
       );
-      const removeFromCartInProduct: Product | undefined = findProduct(
-        removeFromCartProducts,
+      const inProductsRemove: Product | undefined = findProduct(
+        productsListRemove,
         payload
       );
 
       // If is already in cart
-      if (removeFromCartInCart) {
+      if (inCartRemove) {
         // If is only one will remove the product from list
-        if (removeFromCartInCart.amount === 1) {
+        if (inCartRemove.amount === 1) {
+          if (inProductsRemove) {
+            inProductsRemove.amount++;
+          }
           return {
             ...state,
-            cartItems: removeFromCartCartItems.filter(
-              (productInCart) => productInCart.id !== removeFromCartInCart.id
+            cartItems: cartItemsRemove.filter(
+              (productInCart) => productInCart.id !== inCartRemove.id
             ),
-            products: removeFromCartProducts,
-            //removeFromCartInProduct.amount++;
-            // I have to return updated products list
+            products: productsListRemove,
           };
         }
         // If more than one
-        if (removeFromCartInCart.amount > 1) {
-          removeFromCartInCart.amount--;
-          if (removeFromCartInProduct) {
-            removeFromCartInProduct.amount++;
+        if (inCartRemove.amount > 1) {
+          inCartRemove.amount--;
+          if (inProductsRemove) {
+            inProductsRemove.amount++;
           }
         }
       }
-
       return {
         ...state,
-        products: removeFromCartInCart,
-        cartItems: removeFromCartCartItems,
+        products: productsListRemove,
+        cartItems: cartItemsRemove,
       };
     case TYPES.UPDATE_PRODUCTS:
       return {
