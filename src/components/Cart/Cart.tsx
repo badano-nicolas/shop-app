@@ -13,9 +13,11 @@ const Cart = () => {
   );
 
   const removeAllCartItems = () => {
-    /*cartItems.map((productInCart: Product) => {
-      removeProductFromCart(productInCart);
-    });*/
+    cartItems.forEach((productInCart: Product) => {
+      for (let index = 0; index < productInCart.amount; index++) {
+        removeProductFromCart(productInCart);
+      }
+    });
   };
 
   return (
