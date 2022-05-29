@@ -16,10 +16,9 @@ const shopReducer = (state: ShopContextType, action: any) => {
 
   switch (type) {
     case TYPES.ADD_TO_CART:
-      // If the product has stock
       const cartItemAddToCart: Product[] = [...state.cartItems];
       const productsList: Product[] = [...state.products];
-
+      // If the product has stock
       if (payload.amount > 0) {
         const inCart: Product | undefined = findProduct(
           cartItemAddToCart,
@@ -30,22 +29,18 @@ const shopReducer = (state: ShopContextType, action: any) => {
           payload
         );
 
-        console.log(inCart);
         // If the product is in cart and product will add stock
 
-        if (inCart) {
+        if (inCart && inProduct) {
           inCart.amount++;
+          inProduct.amount--; // I have to find a better way to write this
         }
-
-        /*
-
-          {cartItems.length === 0 ? (
-            <p>Tu carrito esta vacio</p>
-          ) : (
-          */
 
         // If the product is not in the cart
         else {
+          if (inProduct) {
+            inProduct.amount--;
+          }
           const newProduct: Product = {
             amount: 1,
             id: payload.id,
@@ -59,6 +54,7 @@ const shopReducer = (state: ShopContextType, action: any) => {
       return {
         ...state,
         cartItems: cartItemAddToCart,
+        products: productsList,
       };
 
     case TYPES.REMOVE_FROM_CART:
