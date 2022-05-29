@@ -5,7 +5,7 @@ import { useContext } from "react";
 import { ThemeContext } from "../../context/ThemeContext";
 
 const Navbar = () => {
-  const { theme, setTheme } = useContext(ThemeContext);
+  const { theme, setAndStoreTheme } = useContext(ThemeContext);
   return (
     <div className="container navbar-container">
       <div className="navbar">
@@ -22,7 +22,9 @@ const Navbar = () => {
             </li>
             <li>
               <button
-                onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+                onClick={() =>
+                  setAndStoreTheme(theme === "light" ? "dark" : "light")
+                }
               >
                 <CgDarkMode />
               </button>

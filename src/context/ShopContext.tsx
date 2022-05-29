@@ -25,6 +25,15 @@ interface props {
 export const ShopProvider = ({ children }: props) => {
   const [state, dispatch] = useReducer(shopReducer, initialState);
 
+  const setLocalStorage = (value: any) => {
+    try {
+      loadCartList(value);
+      window.localStorage.setItem("text", value);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     if (state.products.length < 1) {
       initProducts(productsData.products);
@@ -51,6 +60,14 @@ export const ShopProvider = ({ children }: props) => {
     console.log("initProducts - shopContext");
     dispatch({
       type: TYPES.UPDATE_PRODUCTS,
+      payload: products,
+    });
+  };
+
+  const loadCartList = (products: Array<Product>) => {
+    console.log("loadCart - shopContext");
+    dispatch({
+      type: TYPES.UPDATE_CART_LIST,
       payload: products,
     });
   };

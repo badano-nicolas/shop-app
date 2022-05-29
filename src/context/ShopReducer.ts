@@ -100,7 +100,7 @@ const shopReducer = (state: ShopContextType, action: any) => {
         ...state,
         products: payload,
       };
-    case TYPES.UPDATE_CART:
+    case TYPES.UPDATE_CART_LIST:
       return {
         ...state,
         cartItems: payload,
