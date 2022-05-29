@@ -48,6 +48,7 @@ button {
 }
 
 .light {
+  min-height: 100vh;
   background-color: $background;
 
   .navbar-container {
@@ -68,6 +69,7 @@ button {
 }
 
 .dark {
+  min-height: 100vh;
   background-color: $background-dark;
   color: $white;
 

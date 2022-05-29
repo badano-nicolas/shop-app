@@ -93,14 +93,13 @@ const shopReducer = (state: ShopContextType, action: any) => {
       };
     case TYPES.ADD_PRODUCT:
       const newProduct: Product = payload;
-
       const lastProduct: Product = state.products[state.products.length - 1];
 
       newProduct.id = lastProduct.id + 1;
 
       return {
         ...state,
-        products: state.products.push(newProduct),
+        products: [...state.products, newProduct],
       };
     default:
       throw new Error(`No case for type ${type} found in shopReducer.`);
