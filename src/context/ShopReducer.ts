@@ -56,7 +56,9 @@ const shopReducer = (state: ShopContextType, action: any) => {
         ...state,
         cartItems: state.cartItems,
       };
+
     case TYPES.REMOVE_FROM_CART:
+      console.log(payload);
       const inCart: Product | undefined = findProduct(state.cartItems, payload);
       const inProduct: Product | undefined = findProduct(
         state.products,
@@ -65,6 +67,7 @@ const shopReducer = (state: ShopContextType, action: any) => {
 
       if (inCart) {
         if (inCart.amount === 1) {
+          console.log("Amount === 1");
           const newCartList: Product[] = state.cartItems.filter(
             (productInCart) => productInCart.id !== inCart.id
           );
@@ -74,8 +77,8 @@ const shopReducer = (state: ShopContextType, action: any) => {
           };
         }
         if (inCart.amount > 1) {
+          console.log("Amount > 1");
           inCart.amount--;
-
           if (inProduct) {
             inProduct.amount++;
           }
@@ -84,8 +87,16 @@ const shopReducer = (state: ShopContextType, action: any) => {
 
       return {
         ...state,
+        products: state.products,
+        cartItems: state.cartItems,
+      };
+    case "DONTREMOVE":
+      // For some reason if i remove this case, shop context will have an error ill fix later
+      return {
+        ...state,
         cartItems: payload,
       };
+
     case TYPES.UPDATE_PRODUCTS:
       return {
         ...state,
@@ -94,9 +105,7 @@ const shopReducer = (state: ShopContextType, action: any) => {
     case TYPES.ADD_PRODUCT:
       const newProduct: Product = payload;
       const lastProduct: Product = state.products[state.products.length - 1];
-
       newProduct.id = lastProduct.id + 1;
-
       return {
         ...state,
         products: [...state.products, newProduct],
