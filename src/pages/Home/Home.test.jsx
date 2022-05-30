@@ -52,17 +52,18 @@ test('Add first product to cart and check the stock after and before', () => {
 
 })
 
-/*test('After adding first product to cart many times should have stock 0', () => {
+test('After adding first product to cart many times should have stock 0', () => {
     render(
         <ShopProvider>
             <Products />
         </ShopProvider>
     );
 
-    const productContainers = screen.getAllByRole("contentinfo");
+    expect(window.localStorage.getItem('cartItems')).toBeNull();
+    screen.getByText("Stock: 1");
 
-
-})*/
+    // for some reason the provider is saving the data
+})
 
 /*
 test('After adding first product to cart many times should have stock 0', () => {

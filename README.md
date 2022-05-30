@@ -63,9 +63,9 @@ Cart:
 
 Cart & Products:
 
-- [ ] Click firs product to cart (from products) and remove it (from cart) the stock should be 2 again.
-- [ ] Click the add 3 differnt products and cart list should be 3.
-- [ ] Add one product to cart and click remove all button cart should be empty.
+- [ ] Click firs product to cart (from products) and remove it (from cart), the stock should be 2 again.
+- [ ] Click add product from 3 product, cart list should be 3.
+- [ ] Add one product to cart and click remove all button, cart should be empty.
 - [ ] Add one product and check if total in cart is correct.
 
 AddProduct
