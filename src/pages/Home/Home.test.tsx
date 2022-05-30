@@ -3,16 +3,13 @@ import Cart from '../../components/Cart/Cart';
 import Products from '../../components/Products/Products';
 import { ShopProvider } from '../../context/ShopContext';
 
-let container;
+
 
 beforeEach(() => {
-    container = document.createElement('div');
-    document.body.appendChild(container);
+    
 });
 
 afterEach(() => {
-    document.body.removeChild(container);
-    container.remove();
     window.localStorage.removeItem('cartItems');
 })
 
@@ -43,7 +40,6 @@ test('Add first product to cart and check the stock after and before', () => {
         </ShopProvider>
     );
 
-    screen.getByText("Stock: 2");
     // Check if local storage is empty
     expect(window.localStorage.getItem('cartItems')).toBeNull();
     const addToCartButton = screen.getAllByText("Agregar al carro");

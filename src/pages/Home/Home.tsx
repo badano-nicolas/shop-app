@@ -11,7 +11,7 @@ const Home = () => {
     <div className={theme}>
       <Navbar />
       <div className="container">
-        <div className="main-container">
+        <div className="home-container">
           <Products />
           <Cart />
         </div>
