@@ -40,7 +40,7 @@ This command will transpile the nodejs app and make a production build of the re
 - [ ] Check if theme is light.
 - [ ] Switch theme and should be dark (inital light).
 - [ ] Reload page after switch and should be dark.
-- [ ] Amount of cart items should be 10.
+- [ ] Amount of product list should be 10.
 - [ ] Cart should be empty.
 - [ ] Add product with id 1 (from products) and stock should be -1
 - [ ] After adding product cart should have 1 item.
