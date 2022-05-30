@@ -9,6 +9,14 @@ const findProduct = (products: Product[], productToFind: Product) => {
   return products.find((productFound) => productFound.id === productToFind.id);
 };
 
+const setCartItemsLocalStorage = (value: any) => {
+  try {
+    window.localStorage.setItem("cartItems", JSON.stringify(value));
+  } catch (error) {
+    // call toast
+  }
+};
+
 const shopReducer = (state: ShopContextType, action: any) => {
   const { type, payload } = action;
 
@@ -47,6 +55,7 @@ const shopReducer = (state: ShopContextType, action: any) => {
         }
       }
 
+      setCartItemsLocalStorage(cartItemAddToCart);
       return {
         ...state,
         cartItems: cartItemAddToCart,
@@ -72,11 +81,13 @@ const shopReducer = (state: ShopContextType, action: any) => {
           if (inProductsRemove) {
             inProductsRemove.amount++;
           }
+          const cartItems = cartItemsRemove.filter(
+            (productInCart) => productInCart.id !== inCartRemove.id
+          );
+          setCartItemsLocalStorage(cartItems);
           return {
             ...state,
-            cartItems: cartItemsRemove.filter(
-              (productInCart) => productInCart.id !== inCartRemove.id
-            ),
+            cartItems: cartItems,
             products: productsListRemove,
           };
         }
@@ -88,6 +99,7 @@ const shopReducer = (state: ShopContextType, action: any) => {
           }
         }
       }
+      setCartItemsLocalStorage(cartItemsRemove);
       return {
         ...state,
         products: productsListRemove,

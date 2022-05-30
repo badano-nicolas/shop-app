@@ -35,13 +35,7 @@ export const ShopProvider = ({ children }: props) => {
     }
   }, [state]);
 
-  const setLocalStorage = (value: any) => {
-    try {
-      window.localStorage.setItem("cartItems", JSON.stringify(value));
-    } catch (error) {
-      // call toast
-    }
-  };
+
 
   // should be specific with type
   const getStoredCartItems: any = () => {
@@ -58,7 +52,6 @@ export const ShopProvider = ({ children }: props) => {
       type: TYPES.ADD_TO_CART,
       payload: product,
     });
-    setLocalStorage(state.cartItems);
   };
 
   const removeProductFromCart = (product: Product) => {
@@ -66,7 +59,6 @@ export const ShopProvider = ({ children }: props) => {
       type: TYPES.REMOVE_FROM_CART,
       payload: product,
     });
-    setLocalStorage(state.cartItems);
   };
 
   const initProducts = (products: Array<Product>) => {
