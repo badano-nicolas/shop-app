@@ -21,7 +21,7 @@ const Cart = () => {
   };
 
   return (
-    <div className="cart-container card">
+    <div className="cart-container card" role={"contentinfo"}>
       {cartItems && (
         <div className="items-container">
           <div className="header-container">

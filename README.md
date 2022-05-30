@@ -37,24 +37,25 @@ This command will transpile the nodejs app and make a production build of the re
 
 ## Test Cases (done and not)
 
-- [ ] Check if theme is light.
-- [ ] Switch theme and should be dark (inital light).
-- [ ] Reload page after switch and should be dark.
-- [ ] Amount of product list should be 10.
-- [ ] Cart should be empty.
-- [ ] Add product with id 1 (from products) and stock should be -1
-- [ ] After adding product cart should have 1 item.
-- [ ] Click add button from cart and amout should be 2.
-- [ ] Product with id 1 should be have 0 stock.
-- [ ] Click add button from cart and amout should be 2 again.
-- [ ] Product with id 1 should be have 0 stock again.
-- [ ] Add product with id 2 (from products) and cart list should have 2 items.
-- [ ] Add product with id 3 (from products) and cart list should have 3 items.
-- [ ] Reload page and cart items should be 3.
-- [ ] Click remove all button and cart should be empty.
-- [ ] Check stock for product with id 1 and should be 2.
-- [ ] Add new product and product list should be 11.
+Products:
+- [x] Amount of product list should be 10.
+- [x] Add first product to cart and check the stock after and before.
+- [ ] After adding first product to cart many times should have stock 0.
+- [ ] Add and remove product and check after and before.
+- [ ] After removing first product to cart many times should have stock 2.
 
+Cart:
+- [x] Cart should be empty.
+
+
+Cart & Products:
+- [ ] Click firs product to cart (from products) and remove it (from cart) the stock should be 2 again.
+- [ ] Click the add 3 differnt products and cart list should be 3.
+- [ ] Add one product to cart and click remove all button cart should be empty.
+- [ ] Add one product and check if total in cart is correct.
+
+AddProduct
+- [ ] Add new product and product list should be 11.
 
 ## License
 

@@ -6,9 +6,9 @@ const Products = () => {
   const { products, addProductToCart, removeProductFromCart } = useShop();
 
   return (
-    <div className="products-container">
+    <div className="products-container" role={"listitem"}>
       {products.map((product: Product, i: number) => (
-        <div key={i} className="card product-card">
+        <div key={i} className="card product-card" role={"contentinfo"}>
           <h3>{product.name} </h3>
           <p>Precio: ${product.price}</p>
           <p>Stock: {product.amount}</p>
