@@ -3,8 +3,6 @@ import Cart from '../../components/Cart/Cart';
 import Products from '../../components/Products/Products';
 import { ShopProvider } from '../../context/ShopContext';
 
-
-
 beforeEach(() => {
     
 });
