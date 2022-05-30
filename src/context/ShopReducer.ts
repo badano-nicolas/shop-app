@@ -12,8 +12,6 @@ const findProduct = (products: Product[], productToFind: Product) => {
 const shopReducer = (state: ShopContextType, action: any) => {
   const { type, payload } = action;
 
-  console.log(type, payload);
-
   switch (type) {
     case TYPES.ADD_TO_CART:
       const cartItemAddToCart: Product[] = [...state.cartItems];

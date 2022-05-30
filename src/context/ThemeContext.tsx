@@ -30,7 +30,9 @@ export const ThemeProvider = ({ children }: props) => {
     try {
       setTheme(value);
       localStorage.setItem("theme", value);
-    } catch (error) {}
+    } catch (error) {
+      // call toast
+    }
   };
 
   return (

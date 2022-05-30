@@ -39,7 +39,7 @@ export const ShopProvider = ({ children }: props) => {
     try {
       window.localStorage.setItem("cartItems", JSON.stringify(value));
     } catch (error) {
-      console.log(error);
+      // call toast
     }
   };
 
@@ -48,11 +48,12 @@ export const ShopProvider = ({ children }: props) => {
     try {
       const storedCartItems = localStorage.getItem("cartItems");
       return storedCartItems ? JSON.parse(storedCartItems) : [];
-    } catch (error) {}
+    } catch (error) {
+      // call toast
+    }
   };
 
   const addProductToCart = (product: Product) => {
-    console.log("addProductToCart - shopContext");
     dispatch({
       type: TYPES.ADD_TO_CART,
       payload: product,
@@ -61,7 +62,6 @@ export const ShopProvider = ({ children }: props) => {
   };
 
   const removeProductFromCart = (product: Product) => {
-    console.log("removeProductFromCart - shopContext");
     dispatch({
       type: TYPES.REMOVE_FROM_CART,
       payload: product,
@@ -70,7 +70,6 @@ export const ShopProvider = ({ children }: props) => {
   };
 
   const initProducts = (products: Array<Product>) => {
-    console.log("initProducts - shopContext");
     dispatch({
       type: TYPES.UPDATE_PRODUCTS,
       payload: products,
@@ -78,7 +77,6 @@ export const ShopProvider = ({ children }: props) => {
   };
 
   const loadCartList = (products: Array<Product>) => {
-    console.log("loadCart - shopContext");
     dispatch({
       type: TYPES.UPDATE_CART_LIST,
       payload: products,
@@ -86,7 +84,6 @@ export const ShopProvider = ({ children }: props) => {
   };
 
   const addNewProduct = (product: Product) => {
-    console.log("addNewProduct - shopContext");
     dispatch({
       type: TYPES.ADD_PRODUCT,
       payload: product,
