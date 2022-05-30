@@ -25,20 +25,31 @@ interface props {
 export const ShopProvider = ({ children }: props) => {
   const [state, dispatch] = useReducer(shopReducer, initialState);
 
+  useEffect(() => {
+    const sortedCartItems = getStoredCartItems();
+    if (state.products.length < 1) {
+      if (sortedCartItems) {
+        loadCartList(sortedCartItems);
+      }
+      initProducts(productsData.products);
+    }
+  }, [state]);
+
   const setLocalStorage = (value: any) => {
     try {
-      loadCartList(value);
-      window.localStorage.setItem("text", value);
+      window.localStorage.setItem("cartItems", JSON.stringify(value));
     } catch (error) {
       console.log(error);
     }
   };
 
-  useEffect(() => {
-    if (state.products.length < 1) {
-      initProducts(productsData.products);
-    }
-  }, [state]);
+  // should be specific with type
+  const getStoredCartItems: any = () => {
+    try {
+      const storedCartItems = localStorage.getItem("cartItems");
+      return storedCartItems ? JSON.parse(storedCartItems) : [];
+    } catch (error) {}
+  };
 
   const addProductToCart = (product: Product) => {
     console.log("addProductToCart - shopContext");
@@ -46,6 +57,7 @@ export const ShopProvider = ({ children }: props) => {
       type: TYPES.ADD_TO_CART,
       payload: product,
     });
+    setLocalStorage(state.cartItems);
   };
 
   const removeProductFromCart = (product: Product) => {
@@ -54,6 +66,7 @@ export const ShopProvider = ({ children }: props) => {
       type: TYPES.REMOVE_FROM_CART,
       payload: product,
     });
+    setLocalStorage(state.cartItems);
   };
 
   const initProducts = (products: Array<Product>) => {
